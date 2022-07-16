@@ -7,7 +7,15 @@ public class myPlayer_Script : MonoBehaviour
     public float speed = 1f;
     public int playerHealth=100;
     int damage=10;
-    public int selectedWeapon = 0;
+    zarScript Zar;
+    public GameObject Weapon;
+    public GameObject Weapon1;
+    public GameObject Weapon2;
+    public int sayi;
+    void Awake()
+    {
+        Zar = GetComponent<zarScript>();
+    }
 
     void Start()
     {
@@ -21,6 +29,7 @@ public class myPlayer_Script : MonoBehaviour
         float ZDirection = Input.GetAxis("Vertical");
         Vector3 moveDirection = new Vector3(XDirection, 0.0f, ZDirection);
         transform.position += moveDirection*speed;
+        WeaponSystem();
     }
 
     public void OnCollisionEnter(Collision col)
@@ -30,4 +39,28 @@ public class myPlayer_Script : MonoBehaviour
             playerHealth -= damage;
         }
     }
+
+    void WeaponSystem()
+    {
+        switch (sayi)
+        {
+            case (1):  // +-
+                Weapon2.SetActive(true);
+                print("Silah Kuþanýldý");
+                break;
+            case (2):  // -+
+                Weapon2.SetActive(true);
+                print("Eline Kuþanýldý");
+                break;
+            case (3):  // ++
+                Weapon.SetActive(true);
+                print("Eline Sila ");
+                break;
+            case (4):  // --
+                Weapon1.SetActive(true);
+                print("Eline");
+                break;
+        }
+    }
+
 }

@@ -12,6 +12,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b7b93d7d0c41acc4b8d828b826cbe6ab, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b7b93d7d0c41acc4b8d828b826cbe6ab, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b7b93d7d0c41acc4b8d828b826cbe6ab, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b7b93d7d0c41acc4b8d828b826cbe6ab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.28481102
       objectReference: {fileID: 0}
@@ -114,3 +126,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7526004936278994252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253604523257798749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 676aba931734ff84c8034d6ed11354dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  playerHealth: 100
+  Weapon: {fileID: 0}
+  Weapon1: {fileID: 0}
+  Weapon2: {fileID: 0}

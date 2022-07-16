@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class zarScript : MonoBehaviour
 {
-    int zarNumber1;
-    int zarNumber2;
+    public int zarNumber1;
+    public int zarNumber2;
     public SpriteRenderer spriteRenderer, spriteRenderer2; //zar 1,zar2
     public Sprite artiSprite, eksiSprite; //zar1,zar2
     public GameObject zar1,zar2,artiZar,eksiZar,eksiZar2,artiZar2;
@@ -57,7 +57,7 @@ public class zarScript : MonoBehaviour
             }
         }
     }
-    void sayiOlustur()
+    public void sayiOlustur()
     {
         zarNumber1 = Random.Range(0, 2);
         zarNumber2 = Random.Range(0, 2);
