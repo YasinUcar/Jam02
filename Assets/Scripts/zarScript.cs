@@ -8,7 +8,7 @@ public class zarScript : MonoBehaviour
     public int zarNumber2;
     public SpriteRenderer spriteRenderer, spriteRenderer2; //zar 1,zar2
     public Sprite artiSprite, eksiSprite; //zar1,zar2
-    public GameObject zar1,zar2,artiZar,eksiZar,eksiZar2,artiZar2;
+    public GameObject zar1, zar2, artiZar, eksiZar, eksiZar2, artiZar2;
 
     Animator m_Animator;
 
@@ -16,6 +16,7 @@ public class zarScript : MonoBehaviour
     void Start()
     {
         m_Animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -24,13 +25,12 @@ public class zarScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             sayiOlustur();
-            print(zarNumber1);
-            print(zarNumber2);
+            
             switch (zarNumber1, zarNumber2)
             {
                 case (0, 0): //- -
-                   // spriteRenderer.sprite = eksiSprite;
-                    //spriteRenderer2.sprite = eksiSprite;
+                             // spriteRenderer.sprite = eksiSprite;
+                             //spriteRenderer2.sprite = eksiSprite;
                     eksiZar.SetActive(true);
                     eksiZar2.SetActive(true);
 
