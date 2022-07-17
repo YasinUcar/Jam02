@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/CanvasMenuScene.unity
+    guid: 7885220efe16a9c40a5f674378aba94d
   m_configObjects: {}
