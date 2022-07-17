@@ -11,7 +11,7 @@ public class enemySpawner : MonoBehaviour
     public float zPos;
     public int enemyCount;
 
-    void Update()
+    void Start()
     {
         StartCoroutine(EnemyDrop());
     }
@@ -24,7 +24,7 @@ public class enemySpawner : MonoBehaviour
             zPos = myPlayerTrans.position.z+10;
             Instantiate(theEnemy, new Vector3(xPos,0,zPos),Quaternion.identity);
             yield return new WaitForSeconds(0.8f);
-            enemyCount += 1;
+            enemyCount ++;
         }
     }
 }
