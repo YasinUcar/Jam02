@@ -97,16 +97,11 @@ public class zarScript : MonoBehaviour
     }
     public void sayiOlustur()
     {
-        if (ilkSahneMi = true)
-        {
-            zarNumber1 = 1;
-            zarNumber2 = 1;
-        }
-        else
-        {
+       
+      
             zarNumber1 = Random.Range(0, 2);
             zarNumber2 = Random.Range(0, 2);
-        }
+       
         zar1.SetActive(false);
         zar2.SetActive(false);
 
