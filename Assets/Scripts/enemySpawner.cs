@@ -10,21 +10,26 @@ public class enemySpawner : MonoBehaviour
     public float xPos;
     public float zPos;
     public int enemyCount;
-
-    void Start()
+    public float zaman = 0;
+    void Update()
     {
         StartCoroutine(EnemyDrop());
+        zaman += Time.deltaTime;
     }
 
-    IEnumerator EnemyDrop ()
+    IEnumerator EnemyDrop()
     {
         while (enemyCount < 4)
         {
-            xPos = myPlayerTrans.position.x+10;
-            zPos = myPlayerTrans.position.z+10;
-            Instantiate(theEnemy, new Vector3(xPos,0,zPos),Quaternion.identity);
-            yield return new WaitForSeconds(0.8f);
-            enemyCount ++;
+            if (zaman >= 30)
+                xPos = myPlayerTrans.position.x + 10;
+            zPos = myPlayerTrans.position.z + 10;
+
+            {
+                Instantiate(theEnemy, new Vector3(xPos, 0, zPos), Quaternion.identity);
+                yield return new WaitForSeconds(0.8f);
+                enemyCount += 1;
+            }
         }
     }
 }

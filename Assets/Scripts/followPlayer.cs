@@ -4,17 +4,19 @@ using UnityEngine;
 using UnityEngine.AI;
 public class followPlayer : MonoBehaviour
 {
-    [SerializeField] Transform target;
+    [SerializeField] GameObject target;
     NavMeshAgent nav;
+    public GameObject zarCanvas;
     void Start()
     {
+        target = GameObject.FindGameObjectWithTag("Player");
         nav = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        nav.SetDestination(target.position);
+        nav.SetDestination(target.transform.position);
 
 
         float fark = Vector3.Distance(target.transform.position, this.transform.position);
@@ -23,12 +25,13 @@ public class followPlayer : MonoBehaviour
         {
             GetComponent<Animator>().SetTrigger("Attack");
         }
-        else if(fark>=2f)
+        else if (fark >= 2f)
         {
             GetComponent<Animator>().ResetTrigger("Attack");
         }
-     
+
 
 
     }
+
 }
