@@ -14,7 +14,6 @@ public class chacterControls : MonoBehaviour
     Camera mainCam;
     [SerializeField] float gecikme;
     [Range(1, 20)]
-    Animator anim;
     public float rotationSpeed;
     [Range(1, 20)]
     public float StrafeTurnSpeed;
@@ -24,14 +23,6 @@ public class chacterControls : MonoBehaviour
     [SerializeField] public float jump;
     float normalFov;
     [SerializeField] float SprintFov;
-    public AudioSource attackSound;
-    public AudioClip[] attackClip;
-    bool canAttack = false;
-    float attackIndex;
-    float hasarIndex;
-    public GameObject[] silahlar;
-    dialogueScript dia;
-    public float zaman = 0;
     public enum MovementType
     {
         Directional,
@@ -44,10 +35,9 @@ public class chacterControls : MonoBehaviour
         Anim = GetComponent<Animator>();
         mainCam = Camera.main;
         normalFov = mainCam.fieldOfView;
-        anim = GetComponent<Animator>();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         /*
         if (Input.GetKeyDown(KeyCode.Space))
@@ -55,65 +45,61 @@ public class chacterControls : MonoBehaviour
             transform.position = new Vector3(transform.position.x, jump*Time.deltaTime, transform.position.y);
         }
         */
-        zaman += Time.deltaTime;
+
         Movement();
-        Attack();
     }
     void Movement()
     {
-
-        if (zaman >= 20)
+        if (hareketTipi == MovementType.Strafe)
         {
-            if (hareketTipi == MovementType.Strafe)
+            inputX = Input.GetAxis("Horizontal");
+            inputY = Input.GetAxis("Vertical");
+            Anim.SetFloat("iX", inputX, gecikme, Time.deltaTime * 10);
+            Anim.SetFloat("iY", inputX, gecikme, Time.deltaTime * 10);
+
+
+            var hareketEdiyor = inputX != 0 || inputY != 0;
+            if (hareketEdiyor)
             {
-                inputX = Input.GetAxis("Horizontal");
-                inputY = Input.GetAxis("Vertical");
-                Anim.SetFloat("iX", inputX, gecikme, Time.deltaTime * 10);
-                Anim.SetFloat("iY", inputX, gecikme, Time.deltaTime * 10);
-
-
-                var hareketEdiyor = inputX != 0 || inputY != 0;
-                if (hareketEdiyor)
-                {
-                    float yawCamera = mainCam.transform.rotation.eulerAngles.y;
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, yawCamera, 0), StrafeTurnSpeed * Time.deltaTime);
-                    Anim.SetBool("strafeMoving", true);
-                }
-                else
-                {
-                    Anim.SetBool("strafeMoving", false);
-                }
+                float yawCamera = mainCam.transform.rotation.eulerAngles.y;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, yawCamera, 0), StrafeTurnSpeed * Time.deltaTime);
+                Anim.SetBool("strafeMoving", true);
             }
-
-            if (hareketTipi == MovementType.Directional)
+            else
             {
-                InputMove();
-                InputRotation();
-                movement = new Vector3(inputX, 0, inputY);
-                if (Input.GetKey(sprintButton))
-                {
-                    mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, SprintFov, Time.deltaTime * 2);
-                    maxSpeed = 2;
-                    inputX = 2 * Input.GetAxis("Horizontal");
-                    inputY = 2 * Input.GetAxis("Vertical");
-                }
-                else if (Input.GetKey(walkButton))
-                {
-                    mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, normalFov, Time.deltaTime * 2);
-                    maxSpeed = 0.2f;
-                    inputX = Input.GetAxis("Horizontal");
-                    inputY = Input.GetAxis("Vertical");
-
-                }
-                else
-                {
-                    mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, normalFov, Time.deltaTime * 2);
-                    maxSpeed = 1;
-                    inputX = Input.GetAxis("Horizontal");
-                    inputY = Input.GetAxis("Vertical");
-                }
+                Anim.SetBool("strafeMoving", false);
             }
         }
+
+        if (hareketTipi == MovementType.Directional)
+        {
+            InputMove();
+            InputRotation();
+            movement = new Vector3(inputX, 0, inputY);
+            if (Input.GetKey(sprintButton))
+            {
+                mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, SprintFov, Time.deltaTime * 2);
+                maxSpeed = 2;
+                inputX = 2 * Input.GetAxis("Horizontal");
+                inputY = 2 * Input.GetAxis("Vertical");
+            }
+            else if (Input.GetKey(walkButton))
+            {
+                mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, normalFov, Time.deltaTime * 2);
+                maxSpeed = 0.2f;
+                inputX = Input.GetAxis("Horizontal");
+                inputY = Input.GetAxis("Vertical");
+
+            }
+            else
+            {
+                mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, normalFov, Time.deltaTime * 2);
+                maxSpeed = 1;
+                inputX = Input.GetAxis("Horizontal");
+                inputY = Input.GetAxis("Vertical");
+            }
+        }
+
     }
     void InputMove()
     {
@@ -139,37 +125,4 @@ public class chacterControls : MonoBehaviour
         }
     }
 
-    void Attack()
-    {
-
-
-        if (zaman >= 20)
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                canAttack = true;
-                if (attackSound.isPlaying != true)
-                {
-                    if (silahlar[0].activeSelf)
-                    {
-                        attackSound.PlayOneShot(attackClip[0]);
-                    }
-                    else if (silahlar[1].activeSelf || silahlar[2].activeSelf)
-                    {
-                        attackSound.PlayOneShot(attackClip[1]);
-                    }
-                    else if (silahlar[3].activeSelf)
-                    {
-                        attackSound.PlayOneShot(attackClip[2]);
-                    }
-
-
-                }
-                float hasarIndex = Random.Range(0, 3);
-                attackIndex = Random.Range(0, 3);
-                anim.SetFloat("attackIndex", attackIndex);
-                anim.SetTrigger("Attack");
-            }
-        }
-    }
 }

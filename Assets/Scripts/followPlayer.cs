@@ -23,11 +23,10 @@ public class followPlayer : MonoBehaviour
         {
             GetComponent<Animator>().SetTrigger("Attack");
         }
-        else if(fark>=2f)
+        else
         {
             GetComponent<Animator>().ResetTrigger("Attack");
         }
-     
 
 
     }
