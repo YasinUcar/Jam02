@@ -15,13 +15,14 @@ public class zarScript : MonoBehaviour
     dialogueScript dia;
     public float zaman = 0;
     public bool bastiMi;
-
-
+    bool ilkSahneMi = true;
+    public GameObject zarCanvas;
 
     void Start()
     {
         m_Animator = GetComponent<Animator>();
         bastiMi = false;
+        ilkSahneMi = true;
 
     }
 
@@ -92,12 +93,28 @@ public class zarScript : MonoBehaviour
 
             }
         }
+
     }
     public void sayiOlustur()
     {
-        zarNumber1 = Random.Range(0, 2);
-        zarNumber2 = Random.Range(0, 2);
+        if (ilkSahneMi = true)
+        {
+            zarNumber1 = 1;
+            zarNumber2 = 1;
+        }
+        else
+        {
+            zarNumber1 = Random.Range(0, 2);
+            zarNumber2 = Random.Range(0, 2);
+        }
         zar1.SetActive(false);
         zar2.SetActive(false);
+
+        StartCoroutine(CoroutineTest());
+    }
+    IEnumerator CoroutineTest()
+    {
+        yield return new WaitForSeconds(1.5f);
+        zarCanvas.SetActive(false);
     }
 }

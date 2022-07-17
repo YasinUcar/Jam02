@@ -23,7 +23,7 @@ public class waveManager : MonoBehaviour
         {
 
             timeLeft -= Time.deltaTime;
-            time.text = timeLeft.ToString();
+            time.text = "Wave 1/5 "+ timeLeft.ToString();
             if (timeLeft >= 20)
             {
 
