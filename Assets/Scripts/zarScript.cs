@@ -59,10 +59,10 @@ public class zarScript : MonoBehaviour
                     //spriteRenderer2.sprite = artiSprite;
                     artiZar.SetActive(true);
                     artiZar2.SetActive(true);
-                    silahlar[0].SetActive(true);
+                    silahlar[1].SetActive(true);
 
-                    silahlar[1].SetActive(false);
                     silahlar[2].SetActive(false);
+                    silahlar[0].SetActive(false);
                     silahlar[3].SetActive(false);
 
                     break;
@@ -110,11 +110,7 @@ public class zarScript : MonoBehaviour
         zar1.SetActive(false);
         zar2.SetActive(false);
 
-        StartCoroutine(CoroutineTest());
+
     }
-    IEnumerator CoroutineTest()
-    {
-        yield return new WaitForSeconds(1.5f);
-        zarCanvas.SetActive(false);
-    }
+
 }
