@@ -12,13 +12,9 @@ public class enemySpawner : MonoBehaviour
 
     void Start()
     {
-        
+        StartCoroutine(EnemyDrop()); 
     }
 
-    void Update()
-    {
-        StartCoroutine(EnemyDrop());
-    }
 
     IEnumerator EnemyDrop()
     {
