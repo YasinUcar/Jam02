@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class enemySpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    public GameObject theEnemy;
+    public Transform myPlayerTrans;
+    public float xPos;
+    public float zPos;
+    public int enemyCount;
+
     void Update()
     {
-        
+        StartCoroutine(EnemyDrop());
+    }
+
+    IEnumerator EnemyDrop ()
+    {
+        while (enemyCount < 4)
+        {
+            xPos = myPlayerTrans.position.x+10;
+            zPos = myPlayerTrans.position.z+10;
+            Instantiate(theEnemy, new Vector3(xPos,0,zPos),Quaternion.identity);
+            yield return new WaitForSeconds(0.8f);
+            enemyCount += 1;
+        }
     }
 }
